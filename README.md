@@ -8,6 +8,6 @@ Textiv supports following text data transformations:
 * Numbers to words;
 * String inversion;
 * Escape characters into LaTex form.
-* Naprawianie błędów pisemnych.
+* Fix typos 
 
 The project ~is~ must be compatible with REST.
