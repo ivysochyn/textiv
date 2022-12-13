@@ -24,6 +24,14 @@ public class TestDuplicateEliminationTextTransformer {
         String actual = textTransformer.transform(text);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testMultipleDifferentDuplicateEliminations() {
+        String text = "duplicate duplicate duplicate different different different different different";
+        String expected = "duplicate different";
+        String actual = textTransformer.transform(text);
+        assertEquals(expected, actual);
+    }
     
     @Test
     public void testMultipleDuplicateEliminationsWithSpaces() {
