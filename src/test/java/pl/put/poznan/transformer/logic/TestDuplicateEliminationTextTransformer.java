@@ -1,10 +1,12 @@
 package pl.put.poznan.transformer.logic;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import pl.put.poznan.transformer.logic.DuplicateEliminationTextTransformer;
 import pl.put.poznan.transformer.logic.TextTransformer;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TestDuplicateEliminationTextTransformer {
   private TextTransformer textTransformer;
