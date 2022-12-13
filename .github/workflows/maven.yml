@@ -29,6 +29,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Build documentation with Maven
+      run: mvn javadoc:javadoc
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
@@ -38,5 +40,10 @@ jobs:
       with: 
           name: artifact
           path: target/io-project-architecture-*.jar
+    - name: Upload documentation
+      uses: actions/upload-artifact@v2
+      with:
+          name: documentation
+          path: target/site/
     - name: Download all workflow run artifacts
       uses: actions/download-artifact@v3
