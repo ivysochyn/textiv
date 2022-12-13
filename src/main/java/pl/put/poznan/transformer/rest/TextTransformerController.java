@@ -7,7 +7,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.transformer.logic.EscapeCharactersTextTransformer;
 import pl.put.poznan.transformer.logic.InversionTextTransformer;
 import pl.put.poznan.transformer.logic.TextTransformer;
@@ -61,6 +66,14 @@ public class TextTransformerController {
     return EscapeCharactersTextTransformer.Latex(text);
   }
 
+  // FIXME
+  /**
+   * This method is used to run all the transformations on the text passed using REST API
+   *
+   * @param text - text to be transformed
+   * @param transforms - array of transformations to be performed
+   * @return transformed text
+   */
   @PostMapping(value = "/transform")
   public String post(@PathVariable String text, @RequestBody String json) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
@@ -68,7 +81,9 @@ public class TextTransformerController {
     JsonNode transformsNode = jsonObject.get("transforms");
     String transformsString = transformsNode.toString();
     List<String> transforms = new ArrayList<>();
-    transforms = mapper.readValue(transformsString, transforms.getClass());
+    // FIXME
+    transforms = mapper.readValue(transformsString, new TypeReference<List<String>>() {});
+    // transforms = mapper.readValue(transformsString, transforms.getClass());
     // perform the transformation, you should run your logic here, below is just a silly example
     //  TextTransformer transformer = new TextTransformer(transforms);
     // return transformer.transform(text);
