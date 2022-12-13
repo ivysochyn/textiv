@@ -6,13 +6,12 @@ import pl.put.poznan.transformer.logic.TextTransformerCreator;
 
 public class TestTransformer {
 
+  @Test
+  void TestTextTransformerWrapping() {
+    TextTransformer textTransformer;
+    textTransformer = new TextTransformer(new String[] {"capitalize", "collapsing", "num2word"});
 
-    @Test
-    void TestTextTransformerWrapping(){
-        TextTransformer textTransformer;
-        textTransformer=new TextTransformer(new String[]{"capitalize","collapsing","num2word"});
-
-        TextTransformer tex= TextTransformerCreator.createTextTransformer(textTransformer);
-        assertEquals(1, 1);
-    }
+    TextTransformer tex = TextTransformerCreator.createTextTransformer(textTransformer);
+    assertEquals(1, 1);
+  }
 }

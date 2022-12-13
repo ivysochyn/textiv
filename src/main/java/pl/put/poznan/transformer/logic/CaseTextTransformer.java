@@ -4,15 +4,11 @@ import org.springframework.util.StringUtils;
 import pl.put.poznan.transformer.logic.TextTransformer;
 
 public class CaseTextTransformer extends DecoratedTextTransformer {
-    String state;
-    public CaseTextTransformer(TextTransformer textTransformer,String state) {
+  String state;
 
-        super(textTransformer);
-        this.state=state;
-    }
+  public CaseTextTransformer(TextTransformer textTransformer, String state) {
 
-
-
-
-
+    super(textTransformer);
+    this.state = state;
+  }
 }
