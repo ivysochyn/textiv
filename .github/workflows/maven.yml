@@ -21,7 +21,7 @@ jobs:
         cache: maven
     
     - name: Check code style
-      run: mvn verify
+      run: mvn verify -DsyntaxChecker.isFailOnWarning=true -DsyntaxFormatter.skip=true
     
     - name: Build with Maven
       run: mvn -B package --file pom.xml
