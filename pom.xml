@@ -16,6 +16,8 @@
 
     <properties>
         <java.version>11</java.version>
+        <syntaxChecker.isFailOnWarning>false</syntaxChecker.isFailOnWarning>
+        <syntaxFormatter.skip>false</syntaxFormatter.skip>
     </properties>
 
     
@@ -77,7 +79,7 @@
                             <formatMain>true</formatMain>
                             <formatTest>true</formatTest>
                             <filterModified>false</filterModified>
-                            <skip>false</skip>
+                            <skip>${syntaxFormatter.skip}</skip>
                             <fixImports>false</fixImports>
                             <maxLineLength>100</maxLineLength>
                         </configuration>
@@ -103,7 +105,7 @@
                             <failsOnError>true</failsOnError>
                             <consoleOutput>false</consoleOutput>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                            <failOnViolation>false</failOnViolation>
+                            <failOnViolation>${syntaxChecker.isFailOnWarning}</failOnViolation>
                             <logViolationsToConsole>true</logViolationsToConsole>
                             <violationSeverity>warning</violationSeverity>
                         </configuration>
