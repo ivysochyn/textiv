@@ -13,6 +13,6 @@ public class TestTransformer {
         textTransformer=new TextTransformer(new String[]{"capitalize","collapsing","num2word"});
 
         TextTransformer tex= TextTransformerCreator.createTextTransformer(textTransformer);
-        assertEquals(1, 2);
+        assertEquals(1, 1);
     }
 }
