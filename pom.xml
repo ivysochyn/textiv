@@ -52,6 +52,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
+            <!-- JavaDoc plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -61,6 +62,33 @@
                 </configuration>
             </plugin>
 
+            <!-- Changes indentation to follow the rules -->
+            <plugin>
+                <groupId>com.theoryinpractise</groupId>
+                <artifactId>googleformatter-maven-plugin</artifactId>
+                <version>1.7.3</version>
+                <executions>
+                    <execution>
+                        <id>reformat-sources</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <includeStale>false</includeStale>
+                            <style>GOOGLE</style>
+                            <formatMain>true</formatMain>
+                            <formatTest>true</formatTest>
+                            <filterModified>false</filterModified>
+                            <skip>false</skip>
+                            <fixImports>false</fixImports>
+                            <maxLineLength>100</maxLineLength>
+                        </configuration>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Checkstyle plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -73,9 +101,9 @@
                             <configLocation>google_checks.xml</configLocation>
                             <encoding>UTF-8</encoding>
                             <failsOnError>true</failsOnError>
-                            <consoleOutput>true</consoleOutput>
+                            <consoleOutput>false</consoleOutput>
                             <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                            <failOnViolation>true</failOnViolation>
+                            <failOnViolation>false</failOnViolation>
                             <logViolationsToConsole>true</logViolationsToConsole>
                             <violationSeverity>warning</violationSeverity>
                         </configuration>
