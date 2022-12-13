@@ -11,3 +11,15 @@ Textiv supports following text data transformations:
 * Fix typos 
 
 The project ~is~ must be compatible with REST.
+
+## Building instructions
+
+To build the executable `.jar` you can use:
+```
+mvn install
+```
+
+This will create an executable `target/io-project-architecture-*.jar` file that can be run using:
+```
+java -jar target/io-project-architecture-*.jar
+```
