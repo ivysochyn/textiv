@@ -5,7 +5,12 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
   public InversionTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);
   }
-  ///hello
+
+  @Override
+  public String transform(String text) {
+    return inversion(textTransformer.transform(text));
+  }
+
   public static String inversion(final String input) {
     final char[] charsInput = input.toCharArray();
     final char[] charsOutput = new char[charsInput.length];
