@@ -12,7 +12,6 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
    * @param text We pass to this parameter the text that we want to invert
    * @return Returns the inverted text
    */
-
   @Override
   public String transform(String text) {
     return inversion(textTransformer.transform(text));
@@ -23,7 +22,6 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
    * @param input We pass to this parameter the text that we want to invert
    * @return Returns the inverted text
    */
-
   public static String inversion(final String input) {
     final char[] charsInput = input.toCharArray();
     final char[] charsOutput = new char[charsInput.length];
