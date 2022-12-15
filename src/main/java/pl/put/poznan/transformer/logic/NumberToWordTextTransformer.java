@@ -1,11 +1,12 @@
 package pl.put.poznan.transformer.logic;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NumberToWordTextTransformer extends DecoratedTextTransformer{
-    static public NumberToWordTextTransformer.AbstractProcessor processor;
     @Override
     public String transform(String text) {
-        processor = new NumberToWordTextTransformer.DefaultProcessor();
-        return processor.getName(text);
+        return NumberInStringFormatToText(text);
         }
 
 
@@ -245,4 +246,34 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
             return name;
         }
     }
+
+    public static String NubmerInString(String str) {
+
+        StringBuffer res = new StringBuffer();
+        Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+        Matcher matcher = pat.matcher(str);
+        while (matcher.find()) {
+            res.insert(res.length(), matcher.group() + " ");
+        }
+        String result = String.valueOf(res);
+        return result;
+    }
+
+    static public AbstractProcessor processor;
+
+    public static String NumberInStringFormatToText(String text) {
+        processor = new DefaultProcessor();
+
+        String strValues = NubmerInString(text);
+        String[] subStr = strValues.split(" ");
+
+        for (String val : subStr) {
+            text = text.replace(val, processor.getName(val));
+        }
+        return text;
+
+
+    }
+
 }
+
