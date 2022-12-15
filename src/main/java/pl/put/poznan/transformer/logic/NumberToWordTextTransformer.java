@@ -13,6 +13,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
     public NumberToWordTextTransformer(TextTransformer textTransformer) {
         super(textTransformer);
     }
+
     static public class ScaleUnit
     {
         private final int exponent;
@@ -53,6 +54,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
         }
     }
     static public Scale SCALE = Scale.SHORT;
+   
     static abstract public class AbstractProcessor
     {
         static protected final String SEPARATOR = " ";
@@ -89,12 +91,12 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
             if (number < 10)
             {
                 offset = (number % 10) - 1;
-//number /= 10;
+            //number /= 10;
             }
             else if (number < 20)
             {
                 offset = (number % 20) - 1;
-//number /= 100;
+            //number /= 100;
             }
             if (offset != NO_VALUE )
             {
@@ -186,12 +188,26 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
         }
     }
 
+    /**
+     * <p>
+     * This class includes methods of the classes above that deal with individual cases in number substitution for a word. 
+     * </p>
+     */
     static public class DefaultProcessor extends AbstractProcessor
     {
         static private final String MINUS = "minus";
         static private final String UNION_AND = "and";
         static private final String ZERO_TOKEN = "zero";
         private final AbstractProcessor processor = new HundredProcessor();
+      /**
+      * <p>
+      * This method that returns a number in word format.
+      * </p>
+      *
+      * @param value Number in string format
+      * @return Number in words 
+      */
+
         @Override
         public String getName(String value)
         {
@@ -246,7 +262,15 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
             return name;
         }
     }
-
+    
+    /**
+    * <p>
+    * This method captures the numbers from the string.
+    * </p>
+    *
+    * @param str A sentence containing numbers 
+    * @return Number in string format
+    */
     public static String NubmerInString(String str) {
 
         StringBuffer res = new StringBuffer();
@@ -261,6 +285,14 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer{
 
     static public AbstractProcessor processor;
 
+    /**
+     * <p>
+     * This method inserts the transformed numbers into the sentence in the correct order, using the methods described above. 
+     * </p>
+     *
+     * @param str A sentence containing numbers
+     * @return Numbers in words format into the sentence in the correct order
+     */
     public static String NumberInStringFormatToText(String text) {
         processor = new DefaultProcessor();
 
