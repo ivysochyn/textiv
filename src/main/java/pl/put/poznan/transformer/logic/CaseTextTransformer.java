@@ -1,5 +1,7 @@
 package pl.put.poznan.transformer.logic;
 
+import java.util.StringJoiner;
+
 public class CaseTextTransformer extends DecoratedTextTransformer {
     String state;
    
@@ -64,13 +66,16 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
        */
 
     public static String CapitalizeCaseTransform(String strInCase){
-        StringBuffer res = new StringBuffer();
+
+        if (strInCase.length() == 0) {
+            return strInCase;
+        }
+        StringJoiner result = new StringJoiner(" ");
         String[] subStr = strInCase.split(" ");
         for (String s : subStr) {
             String cap = s.substring(0, 1).toUpperCase();
-            res.insert(res.length(), cap + s.substring(1) + " ");
+            result.add(cap + s.substring(1));
         }
-        String result = String.valueOf(res);
-        return result;
+        return String.valueOf(result);
     }
 }
