@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Hello Spring Boot!</title>
+    <title>Textiv: Submit text</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Hello Spring Boot!</p>
+    <center>
+        <form th:action="@{/}" th:object="${inputText}" method="post">
+            <input type="text" th:field="*{content}" />
+            <input type="submit" value="Submit" />
+        </form>
+    </center>
 </body>
 </html>
