@@ -1,6 +1,12 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class EscapeCharactersTextTransformer extends DecoratedTextTransformer {
+
+  private static final Logger logger = LoggerFactory.getLogger(InversionTextTransformer.class);
+
   public EscapeCharactersTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);
   }
@@ -25,8 +31,10 @@ public class EscapeCharactersTextTransformer extends DecoratedTextTransformer {
    *     program
    */
   public static String Latex(String input) {
+    logger.info(input);
     input = input.replace("&", "\\&");
     input = input.replace("$", "\\$");
+    logger.debug(input);
     return input;
   }
 }
