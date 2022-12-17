@@ -1,15 +1,86 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Textiv: Submit text</title>
+    <script >
+        
+        function handleForm() {
+            var toTransform=document.getElementById("textArea").value;
+            var target="/"+toTransform+"/transform"
+
+            
+            var xmlhttpReq=new XMLHttpRequest();
+            xmlhttpReq.open("POST",target);
+            xmlhttpReq.onreadystatechange=()=>{
+                if(xmlhttpReq.readyState==4){
+            
+
+                        document.getElementById("Result").innerHTML="<p>Result: </p><p>"+xmlhttpReq.responseText+"</p>";
+                  
+                }
+            }
+            
+            var transforms=[];
+            if (document.getElementById("duplicate").checked){
+                transforms.push("duplicate")
+            }
+            if (document.getElementById("upper").checked){
+                transforms.push("upper")
+            }
+            if (document.getElementById("lower").checked){
+                transforms.push("lower")
+            }
+            if (document.getElementById("num2word").checked){
+                transforms.push("num2word")
+            }
+            if (document.getElementById("collapse").checked){
+                transforms.push("collapse")
+            }
+            if (document.getElementById("expand").checked){
+                transforms.push("expand")
+            }
+            if (document.getElementById("spellcheck").checked){
+                transforms.push("spellcheck")
+            }
+            if (document.getElementById("inversion").checked){
+                transforms.push("inversion")
+            }
+            if (document.getElementById("escape").checked){
+                transforms.push("escape")
+            }
+            var transformsString=JSON.stringify(transforms);
+            var toJson='{"transforms":'+transformsString+'}';
+            var toSend=JSON.parse(toJson);
+            xmlhttpReq.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+            xmlhttpReq.send(toJson);
+
+            //console.log(toJson);
+            }
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+    
     <center>
-        <form th:action="@{/}" th:object="${inputText}" method="post">
-            <input type="text" th:field="*{content}" />
-            <input type="submit" value="Submit" />
-        </form>
+        <textarea id="textArea"></textarea>
+        <button onClick="handleForm()">Send</button>
+        <p>
+        <input type="checkbox" id="duplicate">Duplicate Removal</input>
+        <input type ="checkbox" id="upper">To uppercase</input>
+        <input type ="checkbox" id="lower">To lowercase</input>
+        <input type="checkbox" id="num2word">Number to word</input>
+        <input type="checkbox" id="collapse">Abbreviation collapse</input>
+        <input type="checkbox" id="expand">Abbreviation expand</input>
+        <input type="checkbox" id="spellcheck">Spellcheck</input>
+        <input type="checkbox" id="inversion">Inversion</input>
+        <input type="checkbox" id="escape">Escape characters</input>
+        
+
+
+
+        </p>
+
+        <p id="Result"></p>
     </center>
 </body>
 </html>
