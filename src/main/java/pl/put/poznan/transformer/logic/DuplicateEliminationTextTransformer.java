@@ -1,9 +1,12 @@
 package pl.put.poznan.transformer.logic;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 public class DuplicateEliminationTextTransformer extends DecoratedTextTransformer {
   public DuplicateEliminationTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);
   }
+
+  private static final Logger logger = LoggerFactory.getLogger(DuplicateEliminationTextTransformer.class);
 
   /**
    * This method removes next to each other duplicate words from text.
@@ -13,6 +16,7 @@ public class DuplicateEliminationTextTransformer extends DecoratedTextTransforme
    */
   @Override
   public String transform(String text) {
+    logger.info(text);
     String[] words = text.split("\\s+");
     String result = "";
 
@@ -22,6 +26,7 @@ public class DuplicateEliminationTextTransformer extends DecoratedTextTransforme
       }
     }
     result = result.trim();
+    logger.debug(textTransformer.transform(result));
     return textTransformer.transform(result);
   }
 }
