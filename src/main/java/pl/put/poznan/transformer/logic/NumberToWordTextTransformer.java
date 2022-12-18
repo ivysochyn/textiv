@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class NumberToWordTextTransformer extends DecoratedTextTransformer {
   @Override
   public String transform(String text) {
-    return NumberInStringFormatToText(text);
+    return numberInStringFormatToText(text);
   }
 
   public NumberToWordTextTransformer(TextTransformer textTransformer) {
@@ -43,6 +43,12 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
   public enum Scale {
     SHORT;
 
+    /**
+     * Returns the scale unit for the given exponent.
+     *
+     * @param exponent the exponent
+     * @return the scale unit
+     */
     public String getName(int exponent) {
       for (ScaleUnit unit : SCALE_UNITS) {
         if (unit.getExponent() == exponent) {
@@ -168,8 +174,8 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
       if (number >= 100) {
         buffer.append(unitProcessor.getName(number / 100));
         buffer.append(SEPARATOR);
-        int EXPONENT = 2;
-        buffer.append(SCALE.getName(EXPONENT));
+        int exponent = 2;
+        buffer.append(SCALE.getName(exponent));
       }
       String tensName = tensProcessor.getName(number % 100);
       if (!tensName.isEmpty() && (number >= 100)) {
@@ -255,7 +261,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
    * @param str A sentence containing numbers
    * @return Number in string format
    */
-  public static String NubmerInString(String str) {
+  public static String nubmerInString(String str) {
 
     StringBuffer res = new StringBuffer();
     Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
@@ -276,11 +282,13 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
    * @param text A sentence containing numbers
    * @return Numbers in words format into the sentence in the correct order
    */
-  public static String NumberInStringFormatToText(String text) {
+  public static String numberInStringFormatToText(String text) {
     processor = new DefaultProcessor();
 
-    String strValues = NubmerInString(text);
-    if (strValues.length() == 0) return text;
+    String strValues = nubmerInString(text);
+    if (strValues.length() == 0) {
+      return text;
+    }
 
     String[] subStrNumber = strValues.split(" ");
     String[] subStrAll = text.split(" ");
