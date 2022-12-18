@@ -1,10 +1,20 @@
 package pl.put.poznan.transformer.rest;
 
+import pl.put.poznan.transformer.logic.EscapeCharactersTextTransformer;
+import pl.put.poznan.transformer.logic.InversionTextTransformer;
+import pl.put.poznan.transformer.logic.TextTransformer;
+import pl.put.poznan.transformer.logic.TextTransformerCreator;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,16 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.put.poznan.transformer.logic.EscapeCharactersTextTransformer;
-import pl.put.poznan.transformer.logic.InversionTextTransformer;
-import pl.put.poznan.transformer.logic.TextTransformer;
-import pl.put.poznan.transformer.logic.TextTransformerCreator;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/{text}")
@@ -30,48 +30,13 @@ public class TextTransformerController {
 
   private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
-  @RequestMapping(
-      value = "/transforms/inverse",
-      method = RequestMethod.GET,
-      produces = "application/json")
-  public String inverse(@PathVariable String text, String[] transforms) {
-
-    // log the parameters
-    logger.debug(text);
-    logger.debug(Arrays.toString(transforms));
-
-    // perform the transformation, you should run your logic here, below is just a silly example
-    TextTransformer transformer = new TextTransformer(transforms);
-
-    String test = Arrays.toString(transforms);
-
-    return InversionTextTransformer.inversion(text);
-  }
-
-  @RequestMapping(
-      value = "/transforms/escape",
-      method = RequestMethod.GET,
-      produces = "application/json")
-  public String escape(@PathVariable String text, String[] transforms) {
-
-    // log the parameters
-    logger.debug(text);
-    logger.debug(Arrays.toString(transforms));
-
-    // perform the transformation, you should run your logic here, below is just a silly example
-    TextTransformer transformer = new TextTransformer(transforms);
-
-    String test = Arrays.toString(transforms);
-
-    return EscapeCharactersTextTransformer.Latex(text);
-  }
-
   // FIXME
   /**
-   * This method is used to run all the transformations on the text passed using REST API
+   * This method is used to run all the transformations on the text passed using REST API.
    *
-   * @param text - text to be transformed
-   * @param transforms - array of transformations to be performed
+   * @throws IOException if the JSON is malformed
+   * @param text text to be transformed
+   * @param json json containing transformations to be performed
    * @return transformed text
    */
   @PostMapping(value = "/transform")
