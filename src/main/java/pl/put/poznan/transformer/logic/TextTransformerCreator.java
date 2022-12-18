@@ -8,11 +8,14 @@ public class TextTransformerCreator {
   public TextTransformerCreator(String[] transforms) {}
 
   /**
+   * Creates DecoratedTextTransformer containing Decorated objects of class TextTransformer of types
+   * based on the contents of String[] transforms.
+   *
+   * <p>Possible tags: expanding, collapsing, capitalize, upper, lower, duplicate, escape,
+   * spellcheck, inversion, num2word.
+   *
+   * @param textTransformer TextTransformer object to be decorated
    * @return TextTransformer
-   *     <p>Creates DecoratedTextTransformer containing Decorated objects of class TextTransformer
-   *     of types based on the contents of String[] transforms.
-   *     <p>Possible tags: expanding, collapsing, capitalize, upper, lower, duplicate, escape,
-   *     spellcheck, inversion, num2word
    */
   public static TextTransformer createTextTransformer(TextTransformer textTransformer) {
     String[] transforms = textTransformer.getTransforms();
