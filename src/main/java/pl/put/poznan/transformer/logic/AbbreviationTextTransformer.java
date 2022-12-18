@@ -3,8 +3,13 @@ package pl.put.poznan.transformer.logic;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class AbbreviationTextTransformer extends DecoratedTextTransformer {
   String state;
+  private static final Logger logger=LoggerFactory.getLogger(AbbreviationTextTransformer.class);
   Map<String,String> dictionary; 
 
   public AbbreviationTextTransformer(TextTransformer textTransformer, String state) {
@@ -28,17 +33,22 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
   }
   
   public String collapse(String text){
+    logger.info("Input:{}", text);;;
     for (Map.Entry<String,String> entry : dictionary.entrySet()) {
       text=text.replaceAll(entry.getKey(), entry.getValue());
+      
     }
+    logger.info("Output:{}",text);
+
     
     return text;
   }
   public String expand(String text){
-    
+    logger.info("Input:{}",text);
     for (Map.Entry<String,String> entry : dictionary.entrySet()) {
       text=text.replaceAll(entry.getValue(), entry.getKey());
     }
+    logger.info("Output:{}",text);
     return text;
   }
   @Override
