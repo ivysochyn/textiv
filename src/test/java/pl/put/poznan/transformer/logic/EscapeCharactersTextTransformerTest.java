@@ -29,4 +29,36 @@ class EscapeCharactersTextTransformerTest {
     String actual = textTransformer.transform(text);
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void testEmptyText() {
+    String text = "";
+    String expected = "";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testTextWithoutSpecialCharacters() {
+    String text = "John Smith Sons";
+    String expected = "John Smith Sons";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testManySpecialCharacters() {
+    String text = "$ $ $ & & & $ $ $";
+    String expected = "\\$ \\$ \\$ \\& \\& \\& \\$ \\$ \\$";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testSpecialCharactersTogether() {
+    String text = "&$";
+    String expected = "\\&\\$";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
 }
