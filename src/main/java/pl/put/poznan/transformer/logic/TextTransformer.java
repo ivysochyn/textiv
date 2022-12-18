@@ -12,12 +12,12 @@ public class TextTransformer {
   }
 
   public String transform(String text) {
-    // of course, normally it would do something based on the transforms
+    // FIXME: of course, normally it would do something based on the transforms
     return text;
   }
 
   /**
-   * Returns transforms list
+   * Retuns the list of transforms that will be applied to the text.
    *
    * @return String[]
    */

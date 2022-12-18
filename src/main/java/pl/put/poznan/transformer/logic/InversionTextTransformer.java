@@ -13,7 +13,7 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
   }
 
   /**
-   * This function passes the value of the inverted text further along the layers
+   * This function passes the value of the inverted text further along the layers.
    *
    * @param text We pass to this parameter the text that we want to invert
    * @return Returns the inverted text
@@ -24,7 +24,7 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
   }
 
   /**
-   * This function is used to invert the text while preserving the case
+   * This function is used to invert the text while preserving the case.
    *
    * @param input We pass to this parameter the text that we want to invert
    * @return Returns the inverted text
