@@ -135,6 +135,9 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
 
   @Override
   public String transform(String text) {
+    if (text == null) {
+      return null;
+    }
     if (state == "collapsing") {
       return textTransformer.transform(collapse(text));
     } else {
