@@ -4,11 +4,15 @@ import java.util.List;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.BritishEnglish;
 import org.languagetool.rules.RuleMatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SpellCheckTextTransformer extends DecoratedTextTransformer {
   public SpellCheckTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);
   }
+
+  private static final Logger logger = LoggerFactory.getLogger(SpellCheckTextTransformer.class);
 
   /**
    * Function that checks spelling of the text and returns the text with the mistakes fixed.
@@ -17,6 +21,7 @@ public class SpellCheckTextTransformer extends DecoratedTextTransformer {
    * @return Spell fixed text.
    */
   private String checkSpelling(String text) throws Exception {
+    logger.info(text);
     JLanguageTool langTool = new JLanguageTool(new BritishEnglish());
     List<RuleMatch> matches = langTool.check(text);
 
@@ -36,6 +41,7 @@ public class SpellCheckTextTransformer extends DecoratedTextTransformer {
         }
       }
     }
+    logger.debug(text);
     return text;
   }
 

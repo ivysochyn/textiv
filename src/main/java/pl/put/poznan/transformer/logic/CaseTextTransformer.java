@@ -1,9 +1,12 @@
 package pl.put.poznan.transformer.logic;
 
 import java.util.StringJoiner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CaseTextTransformer extends DecoratedTextTransformer {
   String state;
+  private static final Logger logger = LoggerFactory.getLogger(CaseTextTransformer.class);
 
   @Override
   /**
@@ -13,21 +16,25 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
    * @return Converted text , when selecting the method
    */
   public String transform(String text) {
+
     String newText;
+
+    logger.info(text);
     switch (state) {
       case "upper":
-        newText = upperCaseTransform(textTransformer.transform(text));
+        newText = upperCaseTransform(text);
         break;
       case "lower":
-        newText = lowerCaseTransform(textTransformer.transform(text));
+        newText = lowerCaseTransform(text);
         break;
       case "capitalize":
-        newText = capitalizeCaseTransform(textTransformer.transform(text));
+        newText = capitalizeCaseTransform(text);
         break;
       default:
         newText = text;
         break;
     }
+    logger.debug(newText);
     return textTransformer.transform(newText);
   }
 

@@ -4,12 +4,16 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NumberToWordTextTransformer extends DecoratedTextTransformer {
   @Override
   public String transform(String text) {
-    return numberInStringFormatToText(text);
+    return textTransformer.transform(numberInStringFormatToText(text));
   }
+
+  private static final Logger logger = LoggerFactory.getLogger(NumberToWordTextTransformer.class);
 
   public NumberToWordTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);
@@ -283,6 +287,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
    * @return Numbers in words format into the sentence in the correct order
    */
   public static String numberInStringFormatToText(String text) {
+    logger.info(text);
     processor = new DefaultProcessor();
 
     String strValues = numberInString(text);
@@ -305,7 +310,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
     for (String var : subStrAll) {
       result.add(var);
     }
-
+    logger.debug(result.toString());
     return result.toString();
   }
 }
