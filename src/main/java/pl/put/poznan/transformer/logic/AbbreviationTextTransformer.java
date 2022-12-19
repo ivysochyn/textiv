@@ -6,11 +6,14 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**@param
+ *
+ */
 
 public class AbbreviationTextTransformer extends DecoratedTextTransformer {
   String state;
   private static final Logger logger=LoggerFactory.getLogger(AbbreviationTextTransformer.class);
-  Map<String,String> dictionary; 
+  Map<String,String> dictionary;
 
   public AbbreviationTextTransformer(TextTransformer textTransformer, String state) {
     super(textTransformer);
@@ -31,9 +34,14 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
 
     
   }
-  
+
+  /**
+   * Returns abbreviation of given word provided that the word is in dictionary
+   * @param text
+   * @return
+   */
   public String collapse(String text){
-    logger.info("Input:{}", text);;;
+    logger.info("Input:{}", text);
     for (Map.Entry<String,String> entry : dictionary.entrySet()) {
       text=text.replaceAll(entry.getKey(), entry.getValue());
       
@@ -43,6 +51,13 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
     
     return text;
   }
+
+  /**
+   * Returns full word of given abbreviation provided that the word is in dictionary
+   *
+   * @param text
+   * @return
+   */
   public String expand(String text){
     logger.info("Input:{}",text);
     for (Map.Entry<String,String> entry : dictionary.entrySet()) {
@@ -51,12 +66,14 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
     logger.info("Output:{}",text);
     return text;
   }
+
+
   @Override
   public String transform(String text) {
     if(state=="collapsing"){
-      return collapse(textTransformer.transform(text));
+      return textTransformer.transform(collapse(text));
     }else{
-      return expand(textTransformer.transform(text));
+      return textTransformer.transform(expand(text));
     }
   
   }
