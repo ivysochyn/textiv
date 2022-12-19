@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 public class NumberToWordTextTransformer extends DecoratedTextTransformer {
   @Override
   public String transform(String text) {
-    return numberInStringFormatToText(text);
+    return textTransformer.transform(numberInStringFormatToText(text));
   }
 
   private static final Logger logger = LoggerFactory.getLogger(NumberToWordTextTransformer.class);
