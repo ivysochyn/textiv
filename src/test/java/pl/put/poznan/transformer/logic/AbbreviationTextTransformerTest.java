@@ -19,7 +19,7 @@ class AbbreviationTextTransformerTest {
 
   @Test
   void testOneWordExpanding() {
-    String input = "Dr John Smith";
+    String input = "Dr. John Smith";
     String expected = "Doctor John Smith";
     String actual = textTransformerExpand.transform(input);
     assertEquals(expected, actual);
@@ -27,7 +27,7 @@ class AbbreviationTextTransformerTest {
 
   @Test
   void testOneWordCollapsing() {
-    String expected = "Dr John Smith";
+    String expected = "Dr. John Smith";
     String input = "Doctor John Smith";
     String actual = textTransformerCollapse.transform(input);
     assertEquals(expected, actual);
@@ -36,7 +36,7 @@ class AbbreviationTextTransformerTest {
   @Test
   void multipleWordCollapsing() {
 
-    String expected = "Dr John Smith is working on a new project concerning electronics etc.";
+    String expected = "Dr. John Smith is working on a new project concerning electronics etc.";
     String input = "Doctor John Smith is working on a new project concerning electronics and so on";
     String actual = textTransformerCollapse.transform(input);
     assertEquals(expected, actual);
@@ -44,9 +44,25 @@ class AbbreviationTextTransformerTest {
 
   @Test
   void multipleWordExpanding() {
-    String input = "Dr John Smith is working on a new project concerning electronics etc.";
+    String input = "Dr. John Smith is working on a new project concerning electronics etc.";
     String expected =
-        "Doctor John Smith is working on a new project concerning electronics and so on";
+        "Doctor John Smith is working on a new project companycerning electronics and so on";
+    String actual = textTransformerExpand.transform(input);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void emptyString() {
+    String input = "";
+    String expected = "";
+    String actual = textTransformerExpand.transform(input);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void nullString() {
+    String input = null;
+    String expected = null;
     String actual = textTransformerExpand.transform(input);
     assertEquals(expected, actual);
   }
