@@ -22,13 +22,13 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
     logger.info(text);
     switch (state) {
       case "upper":
-        newText = upperCaseTransform(textTransformer.transform(text));
+        newText = upperCaseTransform(text);
         break;
       case "lower":
-        newText = lowerCaseTransform(textTransformer.transform(text));
+        newText = lowerCaseTransform(text);
         break;
       case "capitalize":
-        newText = capitalizeCaseTransform(textTransformer.transform(text));
+        newText = capitalizeCaseTransform(text);
         break;
       default:
         newText = text;
