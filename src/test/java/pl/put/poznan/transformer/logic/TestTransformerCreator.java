@@ -147,4 +147,60 @@ public class TestTransformerCreator {
     inOrder.verify(mockTextTransformer).getTransforms();
     inOrder.verifyNoMoreInteractions();
   }
+
+  @Test
+  void testTextTransformerRegularFlow() {
+    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "num2word"});
+    textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
+    String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
+    String expected = "?roolf three eht ot og two ekil uoy oD";
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void testTextTransformerRegularFlowEmpty() {
+    TextTransformer textTransformer = new TextTransformer(new String[] {});
+    textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
+    String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
+    String expected = "Do you like 2 go to the 3 floor?";
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void testTextTransformerRegularFlowSingle() {
+    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion"});
+    textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
+    String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
+    String expected = "?roolf 3 eht ot og 2 ekil uoy oD";
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void testTextTransformerRegularFlowTwoDuplicate() {
+    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "inversion"});
+    textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
+    String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
+    String expected = "Do you like 2 go to the 3 floor?";
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  void testTextTransformerRegularMultiple() {
+    TextTransformer textTransformer =
+        new TextTransformer(
+            new String[] {
+              "spellcheck",
+              "inversion",
+              "num2word",
+              "upper",
+              "lower",
+              "escape",
+              "expanding",
+              "collapsing"
+            });
+    textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
+    String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
+    String expected = "?roolf three eht ot og two ekil uoy od";
+    assertEquals(expected, actual);
+  }
 }
