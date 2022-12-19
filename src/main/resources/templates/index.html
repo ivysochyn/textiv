@@ -1,86 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Textiv: Submit text</title>
-    <script >
+    <script>
+        var transforms = [];
         
+        function appendToTransforms(text) {
+            transforms.push(text);
+            document.getElementById("transformations").innerHTML = "<p>Transformations: <\p><p>" + transforms.join("->") + "<\p>";
+        }
+
+        function clearTransforms() {
+            transforms = [];
+            document.getElementById("transformations").innerHTML = "<p>Transformations: <\p>";
+        }
+
         function handleForm() {
-            var toTransform=document.getElementById("textArea").value;
-            var target="/"+toTransform+"/transform"
-
-            
-            var xmlhttpReq=new XMLHttpRequest();
-            xmlhttpReq.open("POST",target);
-            xmlhttpReq.onreadystatechange=()=>{
-                if(xmlhttpReq.readyState==4){
-            
-
-                        document.getElementById("Result").innerHTML="<p>Result: </p><p>"+xmlhttpReq.responseText+"</p>";
-                  
+            var toTransform = document.getElementById("textArea").value;
+            var target = "/" + toTransform + "/transform"
+            var xmlhttpReq = new XMLHttpRequest();
+            xmlhttpReq.open("POST", target);
+            xmlhttpReq.onreadystatechange = () => {
+                if (xmlhttpReq.readyState == 4) {
+                    document.getElementById("Result").innerHTML = "<p>Result: </p><p>" + xmlhttpReq.responseText + "</p>";
                 }
             }
-            
-            var transforms=[];
-            if (document.getElementById("duplicate").checked){
-                transforms.push("duplicate")
-            }
-            if (document.getElementById("upper").checked){
-                transforms.push("upper")
-            }
-            if (document.getElementById("lower").checked){
-                transforms.push("lower")
-            }
-            if (document.getElementById("num2word").checked){
-                transforms.push("num2word")
-            }
-            if (document.getElementById("collapse").checked){
-                transforms.push("collapse")
-            }
-            if (document.getElementById("expand").checked){
-                transforms.push("expand")
-            }
-            if (document.getElementById("spellcheck").checked){
-                transforms.push("spellcheck")
-            }
-            if (document.getElementById("inversion").checked){
-                transforms.push("inversion")
-            }
-            if (document.getElementById("escape").checked){
-                transforms.push("escape")
-            }
-            var transformsString=JSON.stringify(transforms);
-            var toJson='{"transforms":'+transformsString+'}';
-            var toSend=JSON.parse(toJson);
-            xmlhttpReq.setRequestHeader("Content-Type","application/json;charset=UTF-8");
+            var transformsString = JSON.stringify(transforms);
+            var toJson = '{"transforms":' + transformsString + '}';
+            var toSend = JSON.parse(toJson);
+            xmlhttpReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xmlhttpReq.send(toJson);
-
+            clearTransforms();
             //console.log(toJson);
-            }
+        }
     </script>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <body>
-    
     <center>
         <textarea id="textArea"></textarea>
         <button onClick="handleForm()">Send</button>
         <p>
-        <input type="checkbox" id="duplicate">Duplicate Removal</input>
-        <input type ="checkbox" id="upper">To uppercase</input>
-        <input type ="checkbox" id="lower">To lowercase</input>
-        <input type="checkbox" id="num2word">Number to word</input>
-        <input type="checkbox" id="collapse">Abbreviation collapse</input>
-        <input type="checkbox" id="expand">Abbreviation expand</input>
-        <input type="checkbox" id="spellcheck">Spellcheck</input>
-        <input type="checkbox" id="inversion">Inversion</input>
-        <input type="checkbox" id="escape">Escape characters</input>
-        
-
-
-
+            <input type="button" value="Clear" id="clear" onclick="clearTransforms()" />
+            <input type="button" value="Invert" id="inversion" onclick="appendToTransforms('inversion')" />
+            <input type="button" value="Num2Word" id="num2word" onclick="appendToTransforms('num2word')" />
+            <input type="button" value="Expanding" id="expanding" onclick="appendToTransforms('expanding')" />
+            <input type="button" value="Collapsing" id="collapsing" onclick="appendToTransforms('collapsing')" />
+            <input type="button" value="Capitalize" id="capitalize" onclick="appendToTransforms('capitalize')" />
+            <input type="button" value="Upper" id="upper" onclick="appendToTransforms('upper')" />
+            <input type="button" value="Lower" id="lower" onclick="appendToTransforms('lower')" />
+            <input type="button" value="Duplicate" id="duplicate" onclick="appendToTransforms('duplicate')" />
+            <input type="button" value="Escape" id="escape" onclick="appendToTransforms('escape')" />
+            <input type="button" value="Spellcheck" id="spellcheck" onclick="appendToTransforms('spellcheck')" />
+            <input type="button" value="Send" id="send" onclick="handleForm()" />
         </p>
-
-        <p id="Result"></p>
+        <p id="Result">Result: </p>
+        <p id="transformations">Transformations: </p>
     </center>
 </body>
+
 </html>
