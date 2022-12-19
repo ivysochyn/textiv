@@ -11,13 +11,18 @@ public class TextTransformer {
     this.transforms = transforms;
   }
 
+  /**
+   * This method applies all the transforms to the text Should be overriden in subclasses.
+   *
+   * @param text the text to be transformed
+   * @return the transformed text
+   */
   public String transform(String text) {
-    // of course, normally it would do something based on the transforms
     return text;
   }
 
   /**
-   * Returns transforms list
+   * Retuns the list of transforms that will be applied to the text.
    *
    * @return String[]
    */
@@ -25,6 +30,11 @@ public class TextTransformer {
     return transforms;
   }
 
+  /**
+   * Sets the list of transforms that will be applied to the text.
+   *
+   * @param transforms List of transforms
+   */
   public void setTransforms(String[] transforms) {
     this.transforms = transforms;
   }
