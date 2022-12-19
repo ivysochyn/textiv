@@ -29,7 +29,7 @@ public class DuplicateEliminationTextTransformer extends DecoratedTextTransforme
       }
     }
     result = result.trim();
-    logger.debug(textTransformer.transform(result));
+    logger.debug(result);
     return textTransformer.transform(result);
   }
 }
