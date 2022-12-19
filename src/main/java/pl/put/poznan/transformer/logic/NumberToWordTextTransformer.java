@@ -265,7 +265,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
    * @param str A sentence containing numbers
    * @return Number in string format
    */
-  public static String nubmerInString(String str) {
+  public static String numberInString(String str) {
 
     StringBuffer res = new StringBuffer();
     Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
@@ -290,7 +290,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
     logger.info(text);
     processor = new DefaultProcessor();
 
-    String strValues = nubmerInString(text);
+    String strValues = numberInString(text);
     if (strValues.length() == 0) {
       return text;
     }
