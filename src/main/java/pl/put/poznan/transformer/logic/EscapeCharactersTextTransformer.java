@@ -19,7 +19,7 @@ public class EscapeCharactersTextTransformer extends DecoratedTextTransformer {
    */
   @Override
   public String transform(String text) {
-    return latex(textTransformer.transform(text));
+    return textTransformer.transform(latex(text));
   }
 
   /**

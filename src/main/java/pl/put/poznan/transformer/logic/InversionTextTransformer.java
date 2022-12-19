@@ -20,7 +20,7 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
    */
   @Override
   public String transform(String text) {
-    return inversion(textTransformer.transform(text));
+    return textTransformer.transform(inversion(text));
   }
 
   /**

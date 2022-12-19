@@ -16,7 +16,9 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
    * @return Converted text , when selecting the method
    */
   public String transform(String text) {
+
     String newText;
+
     logger.info(text);
     switch (state) {
       case "upper":
@@ -32,7 +34,7 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
         newText = text;
         break;
     }
-    logger.debug(textTransformer.transform(newText));
+    logger.debug(newText);
     return textTransformer.transform(newText);
   }
 
