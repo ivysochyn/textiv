@@ -10,6 +10,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +33,6 @@ public class TextTransformerController {
 
   private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
-  // FIXME
   /**
    * This method is used to run all the transformations on the text passed using REST API.
    *
@@ -47,16 +48,20 @@ public class TextTransformerController {
     JsonNode transformsNode = jsonObject.get("transforms");
     String transformsString = transformsNode.toString();
     List<String> transforms = new ArrayList<>();
-    // FIXME
+
     transforms = mapper.readValue(transformsString, new TypeReference<List<String>>() {});
-    // transforms = mapper.readValue(transformsString, transforms.getClass());
-    // perform the transformation, you should run your logic here, below is just a silly example
-    //  TextTransformer transformer = new TextTransformer(transforms);
-    // return transformer.transform(text);
     String[] transformsArray = new String[transforms.size()];
     transforms.toArray(transformsArray);
     ITextTransformer textTransformer = new TextTransformer(transformsArray);
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
-    return textTransformer.transform(text);
+    String result = textTransformer.transform(text);
+    ObjectNode nodeOutput = mapper.createObjectNode();
+    nodeOutput.put("input", text);
+    ArrayNode arrayNode = mapper.valueToTree(transformsArray);
+
+    nodeOutput.set("transforms", arrayNode);
+    nodeOutput.put("result", result);
+    String outString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(nodeOutput);
+    return outString;
   }
 }

@@ -138,7 +138,8 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
     if (text == null) {
       return null;
     }
-    if (state.equals( "collapsing")) {
+
+    if (state.equals("collapsing")) {
       return textTransformer.transform(collapse(text));
     } else {
       return textTransformer.transform(expand(text));
