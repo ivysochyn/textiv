@@ -58,14 +58,14 @@ public class TextTransformerController {
     transforms.toArray(transformsArray);
     TextTransformer textTransformer = new TextTransformer(transformsArray);
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
-    String result= textTransformer.transform(text);
-    ObjectNode nodeOutput=mapper.createObjectNode();
-    nodeOutput.put("input",text);
-    ArrayNode arrayNode=mapper.valueToTree(transformsArray);
- 
+    String result = textTransformer.transform(text);
+    ObjectNode nodeOutput = mapper.createObjectNode();
+    nodeOutput.put("input", text);
+    ArrayNode arrayNode = mapper.valueToTree(transformsArray);
+
     nodeOutput.set("transforms", arrayNode);
     nodeOutput.put("result", result);
-    String outString=mapper.writerWithDefaultPrettyPrinter().writeValueAsString(nodeOutput);
+    String outString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(nodeOutput);
     return outString;
   }
 }
