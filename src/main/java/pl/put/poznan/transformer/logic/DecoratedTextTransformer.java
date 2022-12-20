@@ -4,19 +4,15 @@ public abstract class DecoratedTextTransformer implements ITextTransformer {
   ITextTransformer textTransformer;
   private String[] transforms;
 
-
   /**
    * DecoratedTextTransformer constructor with TextTransformer parameter.
    *
-   * @param textTransformer2 TextTransformer object
+   * @param textTransformer TextTransformer object
    */
-  public DecoratedTextTransformer(ITextTransformer textTransformer2) {
+  public DecoratedTextTransformer(ITextTransformer textTransformer) {
 
-    
-
-    this.textTransformer = textTransformer2;
-    this.transforms = textTransformer2.getTransforms();
-
+    this.textTransformer = textTransformer;
+    this.transforms = textTransformer.getTransforms();
   }
   /**
    * This method applies all the transforms to the text Should be overriden in subclasses.

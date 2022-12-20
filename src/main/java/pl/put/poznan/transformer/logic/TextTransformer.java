@@ -3,7 +3,7 @@ package pl.put.poznan.transformer.logic;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class TextTransformer implements ITextTransformer{
+public class TextTransformer implements ITextTransformer {
 
   private String[] transforms;
 
