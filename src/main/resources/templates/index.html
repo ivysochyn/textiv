@@ -23,7 +23,8 @@
             xmlhttpReq.open("POST", target);
             xmlhttpReq.onreadystatechange = () => {
                 if (xmlhttpReq.readyState == 4) {
-                    document.getElementById("Result").innerHTML = "<p>Result: </p><p>" + xmlhttpReq.responseText + "</p>";
+                    var result = JSON.parse(xmlhttpReq.responseText).result;
+                    document.getElementById("Result").innerHTML = "<p>Result: </p><p>" + result + "</p>";
                 }
             }
             var transformsString = JSON.stringify(transforms);
