@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class NumberToWordTextTransformerTest {
 
-  private TextTransformer textTransformer;
+  private ITextTransformer textTransformer;
 
   @BeforeEach
   public void createTransformer() {

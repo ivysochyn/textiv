@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestDuplicateEliminationTextTransformer {
-  private TextTransformer textTransformer;
+  private ITextTransformer textTransformer;
 
   @BeforeEach
   public void createTransformer() {

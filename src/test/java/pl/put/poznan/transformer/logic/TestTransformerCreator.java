@@ -21,10 +21,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowSingle() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"inversion"});
     doNothing().when(mockTextTransformer).setTransforms(new String[] {"inversion"});
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(2)).getTransforms();
     verify(mockTextTransformer, times(1)).setTransforms(new String[] {});
@@ -32,10 +32,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowTwo() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"inversion", "num2word"});
     doNothing().when(mockTextTransformer).setTransforms(any(String[].class));
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(2)).getTransforms();
     verify(mockTextTransformer, times(1)).setTransforms(new String[] {"inversion"});
@@ -49,10 +49,10 @@ public class TestTransformerCreator {
         };
     String[] expected =
         new String[] {"inversion", "num2word", "upper", "lower", "inversion", "escape"};
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(transforms);
     doNothing().when(mockTextTransformer).setTransforms(any(String[].class));
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(2)).getTransforms();
     verify(mockTextTransformer, times(1)).setTransforms(expected);
@@ -60,9 +60,9 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowEmpty() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {});
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(1)).getTransforms();
     verify(mockTextTransformer, never()).setTransforms(any(String[].class));
@@ -70,9 +70,9 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowDoesntExist() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"doesntExist"});
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(1)).getTransforms();
     verify(mockTextTransformer, times(1)).setTransforms(any(String[].class));
@@ -91,9 +91,9 @@ public class TestTransformerCreator {
           "spellcheck",
           "doesntExist"
         };
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(transforms);
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     verify(mockTextTransformer, times(1)).getTransforms();
     verify(mockTextTransformer, times(1)).setTransforms(any(String[].class));
@@ -101,10 +101,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowDoesntExistOrder() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"doesntExist"});
     InOrder inOrder = inOrder(mockTextTransformer);
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     inOrder.verify(mockTextTransformer).getTransforms();
     inOrder.verify(mockTextTransformer).setTransforms(any(String[].class));
@@ -113,10 +113,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowEmptyOrder() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {});
     InOrder inOrder = inOrder(mockTextTransformer);
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     inOrder.verify(mockTextTransformer).getTransforms();
     inOrder.verifyNoMoreInteractions();
@@ -124,10 +124,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowSingleOrder() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"inversion"});
     InOrder inOrder = inOrder(mockTextTransformer);
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     inOrder.verify(mockTextTransformer).getTransforms();
     inOrder.verify(mockTextTransformer).setTransforms(new String[] {});
@@ -137,10 +137,10 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerTransformFlowTwoOrder() {
-    TextTransformer mockTextTransformer = mock(TextTransformer.class);
+    ITextTransformer mockTextTransformer = mock(ITextTransformer.class);
     when(mockTextTransformer.getTransforms()).thenReturn(new String[] {"inversion", "num2word"});
     InOrder inOrder = inOrder(mockTextTransformer);
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         TextTransformerCreator.createTextTransformer(mockTextTransformer);
     inOrder.verify(mockTextTransformer).getTransforms();
     inOrder.verify(mockTextTransformer).setTransforms(new String[] {"inversion"});
@@ -150,7 +150,7 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerRegularFlow() {
-    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "num2word"});
+    ITextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "num2word"});
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
     String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
     String expected = "?roolf three eht ot og two ekil uoy oD";
@@ -159,7 +159,7 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerRegularFlowEmpty() {
-    TextTransformer textTransformer = new TextTransformer(new String[] {});
+    ITextTransformer textTransformer = new TextTransformer(new String[] {});
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
     String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
     String expected = "Do you like 2 go to the 3 floor?";
@@ -168,7 +168,7 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerRegularFlowSingle() {
-    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion"});
+    ITextTransformer textTransformer = new TextTransformer(new String[] {"inversion"});
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
     String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
     String expected = "?roolf 3 eht ot og 2 ekil uoy oD";
@@ -177,7 +177,7 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerRegularFlowTwoDuplicate() {
-    TextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "inversion"});
+    ITextTransformer textTransformer = new TextTransformer(new String[] {"inversion", "inversion"});
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
     String actual = textTransformer.transform("Do you like 2 go to the 3 floor?");
     String expected = "Do you like 2 go to the 3 floor?";
@@ -186,7 +186,7 @@ public class TestTransformerCreator {
 
   @Test
   void testTextTransformerRegularMultiple() {
-    TextTransformer textTransformer =
+    ITextTransformer textTransformer =
         new TextTransformer(
             new String[] {
               "spellcheck",

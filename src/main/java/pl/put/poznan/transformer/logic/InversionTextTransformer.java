@@ -8,7 +8,7 @@ public class InversionTextTransformer extends DecoratedTextTransformer {
 
   private static final Logger logger = LoggerFactory.getLogger(InversionTextTransformer.class);
 
-  public InversionTextTransformer(TextTransformer textTransformer) {
+  public InversionTextTransformer(ITextTransformer textTransformer) {
     super(textTransformer);
   }
 

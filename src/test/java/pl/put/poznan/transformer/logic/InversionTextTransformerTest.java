@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class InversionTextTransformerTest {
-  private TextTransformer textTransformer;
+  private ITextTransformer textTransformer;
 
   @BeforeEach
   public void createTransformer() {

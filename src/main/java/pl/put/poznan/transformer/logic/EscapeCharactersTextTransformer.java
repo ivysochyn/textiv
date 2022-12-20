@@ -7,7 +7,7 @@ public class EscapeCharactersTextTransformer extends DecoratedTextTransformer {
 
   private static final Logger logger = LoggerFactory.getLogger(InversionTextTransformer.class);
 
-  public EscapeCharactersTextTransformer(TextTransformer textTransformer) {
+  public EscapeCharactersTextTransformer(ITextTransformer textTransformer) {
     super(textTransformer);
   }
 

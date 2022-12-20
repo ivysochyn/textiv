@@ -38,7 +38,7 @@ public class CaseTextTransformer extends DecoratedTextTransformer {
     return textTransformer.transform(newText);
   }
 
-  public CaseTextTransformer(TextTransformer textTransformer, String state) {
+  public CaseTextTransformer(ITextTransformer textTransformer, String state) {
     super(textTransformer);
     this.state = state;
   }

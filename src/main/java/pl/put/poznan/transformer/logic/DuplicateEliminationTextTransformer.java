@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DuplicateEliminationTextTransformer extends DecoratedTextTransformer {
-  public DuplicateEliminationTextTransformer(TextTransformer textTransformer) {
+  public DuplicateEliminationTextTransformer(ITextTransformer textTransformer) {
     super(textTransformer);
   }
 

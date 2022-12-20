@@ -17,7 +17,7 @@ public class AbbreviationTextTransformer extends DecoratedTextTransformer {
    * @param textTransformer A TextTransformer object to be decorated.
    * @param state A String object containing the state of the abbreviation.
    */
-  public AbbreviationTextTransformer(TextTransformer textTransformer, String state) {
+  public AbbreviationTextTransformer(ITextTransformer textTransformer, String state) {
     super(textTransformer);
     this.state = state;
     this.dictionary = new HashMap<String, String>();

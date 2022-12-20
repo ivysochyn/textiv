@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class EscapeCharactersTextTransformerTest {
-  private TextTransformer textTransformer;
+  private ITextTransformer textTransformer;
 
   @BeforeEach
   public void createTransformer() {

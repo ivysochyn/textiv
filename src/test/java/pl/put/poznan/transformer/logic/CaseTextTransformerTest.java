@@ -10,9 +10,9 @@ import pl.put.poznan.transformer.logic.TextTransformer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CaseTextTransformerTest {
-  private TextTransformer textCapitalizeTransformer;
-  private TextTransformer textLowerTransformer;
-  private TextTransformer textUpperTransformer;
+  private ITextTransformer textCapitalizeTransformer;
+  private ITextTransformer textLowerTransformer;
+  private ITextTransformer textUpperTransformer;
 
   @BeforeEach
   public void createTransformerCapitalize() {

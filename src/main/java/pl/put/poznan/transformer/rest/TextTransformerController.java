@@ -1,6 +1,7 @@
 package pl.put.poznan.transformer.rest;
 
 import pl.put.poznan.transformer.logic.EscapeCharactersTextTransformer;
+import pl.put.poznan.transformer.logic.ITextTransformer;
 import pl.put.poznan.transformer.logic.InversionTextTransformer;
 import pl.put.poznan.transformer.logic.TextTransformer;
 import pl.put.poznan.transformer.logic.TextTransformerCreator;
@@ -54,7 +55,7 @@ public class TextTransformerController {
     // return transformer.transform(text);
     String[] transformsArray = new String[transforms.size()];
     transforms.toArray(transformsArray);
-    TextTransformer textTransformer = new TextTransformer(transformsArray);
+    ITextTransformer textTransformer = new TextTransformer(transformsArray);
     textTransformer = TextTransformerCreator.createTextTransformer(textTransformer);
     return textTransformer.transform(text);
   }

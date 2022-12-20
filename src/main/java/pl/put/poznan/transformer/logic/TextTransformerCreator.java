@@ -21,7 +21,7 @@ public class TextTransformerCreator {
    * @param textTransformer TextTransformer object to be decorated
    * @return TextTransformer
    */
-  public static TextTransformer createTextTransformer(TextTransformer textTransformer) {
+  public static ITextTransformer createTextTransformer(ITextTransformer textTransformer) {
     String[] transforms = textTransformer.getTransforms();
     if (transforms.length > 0) {
       textTransformer.setTransforms(Arrays.copyOfRange(transforms, 0, transforms.length - 1));

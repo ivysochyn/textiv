@@ -15,7 +15,7 @@ public class NumberToWordTextTransformer extends DecoratedTextTransformer {
 
   private static final Logger logger = LoggerFactory.getLogger(NumberToWordTextTransformer.class);
 
-  public NumberToWordTextTransformer(TextTransformer textTransformer) {
+  public NumberToWordTextTransformer(ITextTransformer textTransformer) {
     super(textTransformer);
   }
 

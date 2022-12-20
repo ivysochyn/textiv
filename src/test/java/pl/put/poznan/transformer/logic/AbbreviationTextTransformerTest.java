@@ -6,8 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AbbreviationTextTransformerTest {
-  private TextTransformer textTransformerCollapse;
-  private TextTransformer textTransformerExpand;
+  private ITextTransformer textTransformerCollapse;
+  private ITextTransformer textTransformerExpand;
 
   @BeforeEach
   public void createTransformer() {
