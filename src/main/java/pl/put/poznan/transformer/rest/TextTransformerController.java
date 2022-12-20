@@ -33,7 +33,6 @@ public class TextTransformerController {
 
   private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
-  // FIXME
   /**
    * This method is used to run all the transformations on the text passed using REST API.
    *
@@ -49,12 +48,8 @@ public class TextTransformerController {
     JsonNode transformsNode = jsonObject.get("transforms");
     String transformsString = transformsNode.toString();
     List<String> transforms = new ArrayList<>();
-    // FIXME
+
     transforms = mapper.readValue(transformsString, new TypeReference<List<String>>() {});
-    // transforms = mapper.readValue(transformsString, transforms.getClass());
-    // perform the transformation, you should run your logic here, below is just a silly example
-    //  TextTransformer transformer = new TextTransformer(transforms);
-    // return transformer.transform(text);
     String[] transformsArray = new String[transforms.size()];
     transforms.toArray(transformsArray);
     ITextTransformer textTransformer = new TextTransformer(transformsArray);
