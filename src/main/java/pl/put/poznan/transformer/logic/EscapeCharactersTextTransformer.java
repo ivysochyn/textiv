@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 
 public class EscapeCharactersTextTransformer extends DecoratedTextTransformer {
 
-  private static final Logger logger = LoggerFactory.getLogger(InversionTextTransformer.class);
+  private static final Logger logger =
+      LoggerFactory.getLogger(EscapeCharactersTextTransformer.class);
 
   public EscapeCharactersTextTransformer(TextTransformer textTransformer) {
     super(textTransformer);

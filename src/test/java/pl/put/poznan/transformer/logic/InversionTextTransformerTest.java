@@ -45,4 +45,20 @@ class InversionTextTransformerTest {
     String actual = textTransformer.transform(text);
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void testEmptyText() {
+    String text = "";
+    String expected = "";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testTextSpaceInversion() {
+    String text = " |  ";
+    String expected = "  | ";
+    String actual = textTransformer.transform(text);
+    assertEquals(expected, actual);
+  }
 }

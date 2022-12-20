@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Textiv: Submit text</title>
+    <script>
+        var transforms = [];
+        
+        function appendToTransforms(text) {
+            transforms.push(text);
+            document.getElementById("transformations").innerHTML = "<p>Transformations: <\p><p>" + transforms.join("->") + "<\p>";
+        }
+
+        function clearTransforms() {
+            transforms = [];
+            document.getElementById("transformations").innerHTML = "<p>Transformations: <\p>";
+        }
+
+        function handleForm() {
+            var toTransform = document.getElementById("textArea").value;
+            var target = "/" + toTransform + "/transform"
+            var xmlhttpReq = new XMLHttpRequest();
+            xmlhttpReq.open("POST", target);
+            xmlhttpReq.onreadystatechange = () => {
+                if (xmlhttpReq.readyState == 4) {
+                    document.getElementById("Result").innerHTML = "<p>Result: </p><p>" + xmlhttpReq.responseText + "</p>";
+                }
+            }
+            var transformsString = JSON.stringify(transforms);
+            var toJson = '{"transforms":' + transformsString + '}';
+            var toSend = JSON.parse(toJson);
+            xmlhttpReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlhttpReq.send(toJson);
+            clearTransforms();
+            //console.log(toJson);
+        }
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <center>
+        <textarea id="textArea"></textarea>
+        <button onClick="handleForm()">Send</button>
+        <p>
+            <input type="button" value="Clear" id="clear" onclick="clearTransforms()" />
+            <input type="button" value="Invert" id="inversion" onclick="appendToTransforms('inversion')" />
+            <input type="button" value="Num2Word" id="num2word" onclick="appendToTransforms('num2word')" />
+            <input type="button" value="Expanding" id="expanding" onclick="appendToTransforms('expanding')" />
+            <input type="button" value="Collapsing" id="collapsing" onclick="appendToTransforms('collapsing')" />
+            <input type="button" value="Capitalize" id="capitalize" onclick="appendToTransforms('capitalize')" />
+            <input type="button" value="Upper" id="upper" onclick="appendToTransforms('upper')" />
+            <input type="button" value="Lower" id="lower" onclick="appendToTransforms('lower')" />
+            <input type="button" value="Duplicate" id="duplicate" onclick="appendToTransforms('duplicate')" />
+            <input type="button" value="Escape" id="escape" onclick="appendToTransforms('escape')" />
+            <input type="button" value="Spellcheck" id="spellcheck" onclick="appendToTransforms('spellcheck')" />
+            <input type="button" value="Send" id="send" onclick="handleForm()" />
+        </p>
+        <p id="Result">Result: </p>
+        <p id="transformations">Transformations: </p>
+    </center>
+</body>
+
+</html>
